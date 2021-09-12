@@ -11,6 +11,8 @@ def search_students_year
 
         if input == -1
             break
+        elsif (input < -1) || (input == 0)
+            puts "Введите корректное значение"
         elsif years.include?(input)
             puts "Вы вводили данный возраст ранее"
         else
@@ -25,6 +27,7 @@ def search_students_year
             end
         end
     end
+    p "Вывод файла results.txt"
     File.foreach("results.txt") { |line| p(line.chomp) }
 end
 
