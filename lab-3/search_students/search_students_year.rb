@@ -27,8 +27,8 @@ def search_students_year
             end
         end
     end
-    p "Вывод файла results.txt"
-    File.foreach("results.txt") { |line| p(line.chomp) }
+    puts "Вывод файла results.txt"
+    File.foreach("results.txt") { |line| puts(line.chomp) }
 end
 
 search_students_year
