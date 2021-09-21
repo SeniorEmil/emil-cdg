@@ -1,9 +1,9 @@
-File.exist?("balance.txt") ? $balance = File.read("balance.txt").split("\n")[0].to_i : $balance = 100
+File.exist?("balance.txt") ? $balance = File.read("balance.txt").split("\n")[0].to_f : $balance = 100.0
 
 def deposit
     puts "Введите сумму депозита."
     print "Сумма должна быть больше нуля: "
-    deposit = gets.to_i
+    deposit = gets.to_f
     if deposit <= 0
         puts "Введено некоректное значение."
         puts "Ваш баланс: #{$balance}"
@@ -16,13 +16,13 @@ end
 def withdraw
         puts "Введите сумму вывода."
         print "Сумма должна быть больше нуля: "
-        withdraw = gets.to_i
+        withdraw = gets.to_f
         if (withdraw <= 0) 
             puts "Введено некоректное значение."
             puts "Ваш баланс: #{$balance}"
             return 0
         elsif (withdraw >= $balance)
-            puts "Сумма превышает баланс"
+            puts "Ошибка: Сумма превышает баланс"
             puts "Ваш баланс: #{$balance}"
             return 0
         end
