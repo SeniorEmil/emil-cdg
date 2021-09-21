@@ -2,7 +2,7 @@ def inp_word
     puts "Введите слово: "
     word = gets.chomp
     size_word = word.length
-    puts (word.slice(size_word-2, size_word) == "cs") ? ("#{2**size_word}") : ("#{word.reverse}")
+    return (word.slice(size_word-2, size_word) == "cs") ? ("#{2**size_word}") : ("#{word.reverse}")
 end
 
 def add_pokemons
@@ -16,9 +16,11 @@ def add_pokemons
         color = gets.chomp
         pokemons.push({name: name, color: color})
     end
-    puts pokemons
+    return pokemons
 end
 
+def menu
+    
 input = nil
 
 loop do
@@ -41,3 +43,6 @@ loop do
         puts "Вы ввели неверный символ"
     end
 end
+end
+
+puts (add_pokemons)
