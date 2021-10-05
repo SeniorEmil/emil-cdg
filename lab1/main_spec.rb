@@ -3,14 +3,12 @@ require './main.rb'
 
 RSpec.describe "Main" do
     it "#foobar" do
-      allow_any_instance_of(Kernel).to receive(:gets).and_return("20", "1")
-      expect(foobar).to eq(1)
 
-      allow_any_instance_of(Kernel).to receive(:gets).and_return("5", "20")
-      expect(foobar).to eq(5)
+      expect(foobar(20, 1)).to eq(1)
 
-      allow_any_instance_of(Kernel).to receive(:gets).and_return("10", "19")
-      expect(foobar).to eq(29)
+      expect(foobar(5, 20)).to eq(5)
+
+      expect(foobar(10,19)).to eq(29)
     end
   end
 
