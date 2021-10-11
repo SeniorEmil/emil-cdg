@@ -1,7 +1,7 @@
 def inp_word
     puts "Введите слово: "
     word = gets.chomp
-    size_word = word.length
+    puts (word.slice(size_word-2, size_word))
     return (word.slice(size_word-2, size_word) == "cs") ? ("#{2**size_word}") : ("#{word.reverse}")
 end
 
@@ -34,9 +34,9 @@ loop do
 
     case input
     when 1
-        inp_word
+       puts inp_word
     when 2
-        add_pokemons
+        puts add_pokemons
     when -1
         break
     else
@@ -45,4 +45,4 @@ loop do
 end
 end
 
-puts (add_pokemons)
+puts (inp_word)
