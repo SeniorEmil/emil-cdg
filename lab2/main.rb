@@ -1,7 +1,5 @@
-def inp_word
-    puts "Введите слово: "
-    word = gets.chomp
-    puts (word.slice(size_word-2, size_word))
+def inp_word(word)
+    size_word = word.length
     return (word.slice(size_word-2, size_word) == "cs") ? ("#{2**size_word}") : ("#{word.reverse}")
 end
 
@@ -44,5 +42,3 @@ loop do
     end
 end
 end
-
-puts (inp_word)
