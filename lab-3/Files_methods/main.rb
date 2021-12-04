@@ -1,12 +1,12 @@
 #выводит все строки
-def index(file_name)
+def index(  )
     puts "Строки файла #{file_name}:"
     File.foreach(file_name) { |line| puts(line.chomp) }
 end
 
 #находит конкретную строку в файле и выводит ее
 def find(id)
-    flag = true
+
     File.foreach("file.txt").with_index do |line, index|
         if index == id
             puts line
@@ -14,32 +14,51 @@ def find(id)
         end
     end
 
-    if flag
-        puts "Строка пустая или не найдена"
-    end
+    puts "Строка пустая или не найдена"
+
 end
 
 #находит все строки, где есть указанный паттерн
 def where(file_name, pattern)
+    flag = true
+
     File.foreach(file_name) do |line|
         if line.include?(pattern)
             puts(line)
+            flag = false
         end
     end
+
+    if flag
+        puts "Ничего не найдено"
+    end 
 end
 
 #обновляет конкретную строку файла
-def update(id, text)
-    buffer = []
+# def update(id, text)
+#     buffer = []
 
-    File.foreach("file.txt").with_index do |line, index|
-        index == id ? buffer.push(text) : buffer.push(line)
-    end
+#     File.foreach("file.txt").with_index do |line, index|
+#         index == id ? buffer.push(text) : buffer.push(line)
+#     end
     
-    File.open("file.txt", "w") do |file|
-        buffer.each {|line| file.puts(line)}
-    end
-end
+#     File.open("file.txt", "w") do |file|
+#         buffer.each {|line| file.puts(line)}
+#     end
+# end
+
+# def update(id, name)
+#     file = File.open("file.txt", 'w')
+#     File.foreach("file.txt").with_index do |actor, index|
+#       file.puts(id == index ? name : actor)
+#     end
+  
+#     # file.close
+#     # File.write(ACTORS_LIST_PATH, File.read(BUFFER))
+  
+#     # File.delete(BUFFER) if File.exist?(BUFFER)
+#   end
+  
 
 #удаляет строку
 def delete(id)
@@ -72,7 +91,7 @@ loop do
         index("file.txt")
     when 2
         print "Введите номер строки: "
-        id = gets.to_i.chomp
+        id = gets.to_i
         find(id)
     when 3
         print "Введите значение: "
