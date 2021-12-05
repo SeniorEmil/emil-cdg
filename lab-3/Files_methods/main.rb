@@ -1,15 +1,16 @@
+LIST_PATH = 'file.txt'
+BUFFER = 'buffer.txt'
+
 #выводит все строки
-def index(  )
-    puts "Строки файла #{file_name}:"
-    File.foreach(file_name) { |line| puts(line.chomp) }
+def index
+    File.foreach(LIST_PATH) { |line| puts(line.chomp) }
 end
 
 #находит конкретную строку в файле и выводит ее
 def find(id)
 
-    File.foreach("file.txt").with_index do |line, index|
+    File.foreach(LIST_PATH).with_index do |line, index|
         if index == id
-            puts line
             return line
         end
     end
@@ -20,58 +21,49 @@ end
 
 #находит все строки, где есть указанный паттерн
 def where(file_name, pattern)
-    flag = true
 
     File.foreach(file_name) do |line|
         if line.include?(pattern)
-            puts(line)
-            flag = false
+            @line_id = line
+            puts @line_id
         end
     end
 
-    if flag
+    if !@line_id
         puts "Ничего не найдено"
     end 
 end
 
 #обновляет конкретную строку файла
-# def update(id, text)
-#     buffer = []
-
-#     File.foreach("file.txt").with_index do |line, index|
-#         index == id ? buffer.push(text) : buffer.push(line)
-#     end
-    
-#     File.open("file.txt", "w") do |file|
-#         buffer.each {|line| file.puts(line)}
-#     end
-# end
-
-# def update(id, name)
-#     file = File.open("file.txt", 'w')
-#     File.foreach("file.txt").with_index do |actor, index|
-#       file.puts(id == index ? name : actor)
-#     end
+def update(id, name)
+    file = File.open(BUFFER, 'w')
+    File.foreach(LIST_PATH).with_index do |line, index|
+      file.puts(id == index ? name : line)
+    end
   
-#     # file.close
-#     # File.write(ACTORS_LIST_PATH, File.read(BUFFER))
+    file.close
+    File.write(LIST_PATH, File.read(BUFFER))
   
-#     # File.delete(BUFFER) if File.exist?(BUFFER)
-#   end
+    if File.exist?(BUFFER)
+        File.delete(BUFFER) 
+    end
+end
   
 
 #удаляет строку
 def delete(id)
-    buffer = []
-
-    File.foreach("file.txt").with_index do |line, index|
+    file = File.open(BUFFER, 'w')
+    File.foreach(LIST_PATH).with_index do |line, index|
         if index != id 
-            buffer.push(line)
+            file.puts(line)
         end
     end
-    
-    File.open("file.txt", "w") do |file|
-        buffer.each {|line| file.puts(line)}
+  
+    file.close
+    File.write(LIST_PATH, File.read(BUFFER))
+  
+    if File.exist?(BUFFER)
+        File.delete(BUFFER) 
     end
 end
 
@@ -88,11 +80,12 @@ loop do
     puts "="*20
     case input
     when 1
-        index("file.txt")
+        puts "Строки файла #{LIST_PATH}:"
+        index()
     when 2
         print "Введите номер строки: "
         id = gets.to_i
-        find(id)
+        puts(find(id))
     when 3
         print "Введите значение: "
         text = gets.to_s
@@ -103,12 +96,12 @@ loop do
         print "Введите значение: "
         text = gets.to_s
         update(id, text)
-        index("file.txt")
+        index()
     when 5
         print "Введите номер строки: "
         id = gets.to_i
         delete(id)
-        index("file.txt")
+        index()
     when -1
       break
     else
