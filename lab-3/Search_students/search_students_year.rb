@@ -1,7 +1,10 @@
 require 'fileutils'
 
+$OUTPUT
+
+#Запись в файл outp_file строки соответствующие ключу из inp_file
 def where(inp_file, outp_file, name)
-    file = File.open(outp_file, 'a')
+    file = File.open(outp_file, $years.length == 1 ? 'w' : 'a')
     File.foreach(inp_file) do |line|
         if line.split.last == name
             file.puts(line)
@@ -11,9 +14,10 @@ def where(inp_file, outp_file, name)
 end
 
 
-def search_students_year
-    years = []
+def menu
+    $years = []
     stud_size = File.open("students.txt").read.count(" ")
+    # File.exists?("results.txt") ? File.delete("results.txt") : 0
     loop do     
         puts "Для выхода введите (-1)"
         print "Введите возраст студента(тов): "
@@ -23,16 +27,11 @@ def search_students_year
             break
         elsif (input < -1) || (input == 0)
             puts "Введите корректное значение"
-        elsif years.include?(input)
+        elsif $years.include?(input)
             puts "Вы вводили данный возраст ранее"
         else
-            #Добавить года, чтобы не повторяться
-            years.push(input)
-
-            #Удалить файл results если существует при запуске
-            if (years.size == 1)
-                File.exists?("results.txt") ? File.delete("results.txt") : 0
-            end
+            #Добавить года, чтобы не повторялись
+            $years.push(input)
 
             #Запись в файл results.txt строки соответствующие ключу из students.txt
             where("students.txt", "results.txt", input.to_s)
@@ -42,8 +41,8 @@ def search_students_year
 
             #Сравнение количества слов в файлах
             if (result_size == stud_size)
-               puts "Записаны все студенты."
-              break
+               puts $OUTPUT = "Записаны все студенты."
+               break
             end
         end
     end
@@ -51,4 +50,3 @@ def search_students_year
     File.foreach("results.txt") { |line| puts(line.chomp) }
 end
 
-search_students_year

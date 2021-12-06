@@ -3,7 +3,7 @@ BUFFER = 'buffer.txt'
 
 #выводит все строки
 def index
-    File.foreach(LIST_PATH) { |line| puts(line.chomp) }
+    File.foreach(LIST_PATH) { |line| puts line }
 end
 
 #находит конкретную строку в файле и выводит ее
@@ -20,12 +20,11 @@ def find(id)
 end
 
 #находит все строки, где есть указанный паттерн
-def where(file_name, pattern)
+def where(pattern)
 
-    File.foreach(file_name) do |line|
+    File.foreach(LIST_PATH) do |line|
         if line.include?(pattern)
-            @line_id = line
-            puts @line_id
+            puts @line_id = line
         end
     end
 
@@ -67,6 +66,7 @@ def delete(id)
     end
 end
 
+def menu
 loop do
     puts "="*20
     puts "1 Вывести все строки"
@@ -89,7 +89,7 @@ loop do
     when 3
         print "Введите значение: "
         text = gets.to_s
-        where("file.txt", text)
+        where(text)
     when 4
         print "Введите номер строки: "
         id = gets.to_i
@@ -107,4 +107,5 @@ loop do
     else
         puts "Error: введите верный символ"
     end
+end
 end

@@ -1,11 +1,16 @@
-File.exist?("balance.txt") ? $balance = File.read("balance.txt").split("\n")[0].to_f : $balance = 100.0
+$ERROR
 
+File.exist?("balance.txt") ? 
+    $balance = File.read("balance.txt").split("\n")[0].to_f : 
+    $balance = 100.0
+
+#кладёт депозит на баланс
 def deposit
     puts "Введите сумму депозита."
     print "Сумма должна быть больше нуля: "
     deposit = gets.to_f
     if deposit <= 0
-        puts "Error: ввведите корректное значение."
+        puts $ERROR = "Error: введите корректное значение."
         puts "Ваш баланс: #{$balance}"
         return 0
     end
@@ -13,16 +18,17 @@ def deposit
     puts "Ваш баланс: #{$balance}"
 end
 
+#вывод средст
 def withdraw
         puts "Введите сумму вывода."
         print "Сумма должна быть больше нуля: "
         withdraw = gets.to_f
         if (withdraw <= 0) 
-            puts "Error: введите корректное значение."
+            puts $ERROR = "Error: введите корректное значение."
             puts "Ваш баланс: #{$balance}"
             return 0
         elsif (withdraw >= $balance)
-            puts "Error: введённая сумма превышает баланс"
+            puts $ERROR = "Error: введённая сумма превышает баланс"
             puts "Ваш баланс: #{$balance}"
             return 0
         end
@@ -35,7 +41,7 @@ def balance
 end
 
 
-
+def menu
 loop do
     puts "="*20
     puts "ATM"
@@ -46,7 +52,7 @@ loop do
     print "Вы ввели: "
     input = gets.to_s.chomp.capitalize()
     puts "="*20
-    case input
+    case input 
     when "D"
         deposit
     when "W"
@@ -54,9 +60,10 @@ loop do
     when "B"
         balance
     when "Q"
-        break
         File.write("balance.txt", $balance)
+        break
     else
-        puts "Вы ввели неверный символ"
+        puts $ERROR = "Вы ввели неверный символ"
     end
+end
 end
