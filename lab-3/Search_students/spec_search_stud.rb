@@ -16,5 +16,3 @@ RSpec.describe "Search_students_year" do
         expect($OUTPUT).to eql("Записаны все студенты.")
     end
 end
-
-
