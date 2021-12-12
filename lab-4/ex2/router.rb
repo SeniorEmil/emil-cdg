@@ -18,7 +18,6 @@ module Resource
           break if action == 'q'
         end
   
-  
         action.nil? ? routes[verb].call : routes[verb][action].call
       end
     end
@@ -49,12 +48,12 @@ module Resource
   
     def create
         puts 'Введите содержимое поста:'
-        text = gets.chomp
-        if text == ""
+        post = gets.chomp
+        if post == ""
             puts "Error: введённое значение пустое"
         else
-            @posts.append(text)
-            puts "#{@posts.length - 1}: #{text}"        
+            @posts.append(post)
+            puts "#{@posts.length - 1}: #{post}"        
         end
     end
   
@@ -65,9 +64,9 @@ module Resource
             puts "Error: введите корректный id"
         else
             puts "Введите новое содержимое"
-            text = gets.chomp
-            @posts[id] = text
-            puts "#{id}: #{text}"    
+            post = gets.chomp
+            @posts[id] = post
+            puts "#{id}: #{post}"    
         end
     end
   
@@ -177,6 +176,5 @@ module Resource
     end
   end
   
-#   router = Router.new
-  
-#   router.init
+  # router = Router.new
+  # router.init

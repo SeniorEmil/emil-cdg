@@ -3,43 +3,73 @@ require 'stringio'
 
 require './router.rb'
 
-describe Router do
+RSpec.describe Router do
 
-    # it 'create new post' do
-    #     allow_any_instance_of(Router).to receive(:gets).and_return("1", "q")
-    #     allow_any_instance_of(Resource).to receive(:gets).and_return("POST", "q")
-    #     allow_any_instance_of(PostsController).to receive(:gets).and_return("Нулевой пост")
-    #     atm = Router.new()
-    #     expect(atm.init)
-    #     expect do
-    #       PostsController.new.create
-    #     end.to output("Введите содержимое поста:\n0: Нулевой пост\n").to_stdout
-    # end
+    it 'create new post' do
+        allow_any_instance_of(Router).to receive(:gets).and_return("1", "q")
+        allow_any_instance_of(Resource).to receive(:gets).and_return("POST", "q")
+        allow_any_instance_of(PostsController).to receive(:gets).and_return("Пост")
+        router = Router.new()
+        expect(router.init)
+        expect do
+          PostsController.new.create
+        end.to output("Введите содержимое поста:\n0: Пост\n").to_stdout
+    end
 
-    #
     it 'create new post and show' do
         allow_any_instance_of(Router).to receive(:gets).and_return("1", "q")
         allow_any_instance_of(Resource).to receive(:gets).and_return("POST", "GET", "show", "q")
-        allow_any_instance_of(PostsController).to receive(:gets).and_return("Пост", "3")
-        atm = Router.new()
-        expect(atm.init)
+        allow_any_instance_of(PostsController).to receive(:gets).and_return("Пост", "0")
+        router = Router.new()
+        expect(router.init)
         expect do
           PostsController.new.create
-        end.to output("").to_stdout
+        end.to output("Введите содержимое поста:\n0: Пост\n").to_stdout
     end
 
-    # #вывод средств
-    # it 'withdrawal of funds' do
-    #     allow_any_instance_of(Kernel).to receive(:gets).and_return("W", "200", "Q")
-    #     expect(@atm.init)
-    #     expect(File.read("balance.txt")).to eql("100.0")
-    # end
+    it 'create new posts and viewing them' do
+      allow_any_instance_of(Router).to receive(:gets).and_return("1", "q")
+      allow_any_instance_of(Resource).to receive(:gets).and_return("POST","POST", "GET", "index", "q")
+      allow_any_instance_of(PostsController).to receive(:gets).and_return("Пост0", "Пост1")
+      router = Router.new()
+      expect(router.init)
+      expect do
+        PostsController.new.create
+      end.to output("Введите содержимое поста:\n0: Пост0\n").to_stdout
+    end
 
-    # #показать баланс
-    # it 'balance' do
-    #   allow_any_instance_of(Kernel).to receive(:gets).and_return("B", "Q")
-    #   expect(@atm.init)
-    #   expect(File.read("balance.txt")).to eql("100.0")
-    # end
+    it 'change the post' do
+      allow_any_instance_of(Router).to receive(:gets).and_return("1", "q")
+      allow_any_instance_of(Resource).to receive(:gets).and_return("POST","POST", "PUT", "q")
+      allow_any_instance_of(PostsController).to receive(:gets).and_return("Пост0", "Пост1", "1", "НовыйПост1")
+      router = Router.new()
+      expect(router.init)
+      expect do
+        PostsController.new.create
+      end.to output("Введите содержимое поста:\n0: Пост0\n").to_stdout
+    end
+
+    it 'delete the post' do
+      allow_any_instance_of(Router).to receive(:gets).and_return("1", "q")
+      allow_any_instance_of(Resource).to receive(:gets).and_return("POST","POST", "DELETE", "q")
+      allow_any_instance_of(PostsController).to receive(:gets).and_return("Пост0", "Пост1", "1")
+      router = Router.new()
+      expect(router.init)
+      expect do
+        PostsController.new.create
+      end.to output("Введите содержимое поста:\n0: Пост0\n").to_stdout
+    end
+
+    it 'create new comment' do
+      allow_any_instance_of(Router).to receive(:gets).and_return("2", "q")
+      allow_any_instance_of(Resource).to receive(:gets).and_return("POST", "q")
+      allow_any_instance_of(CommentsController).to receive(:gets).and_return("Комментарий")
+      router = Router.new()
+      expect(router.init)
+      expect do
+        CommentsController.new.create
+      end.to output("Введите комментарий:\n0: Комментарий\n").to_stdout
+  end
+
 
 end

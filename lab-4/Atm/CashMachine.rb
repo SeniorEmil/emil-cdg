@@ -17,7 +17,7 @@ class CashMachine
         puts "Ваш баланс: #{@balance}"
     end
 
-    #вывод средст
+    #вывод средств
     def withdraw
             puts "Введите сумму вывода."
             print "Сумма должна быть больше нуля: "
