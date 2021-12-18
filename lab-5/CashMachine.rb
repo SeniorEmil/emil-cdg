@@ -20,7 +20,7 @@ class CashMachine
                 puts "Error: enter the correct value."
                 puts "Balance: #{@balance}"
                 return 0
-            elsif (sum >= @balance)
+            elsif (sum > @balance)
                 puts "Error: the entered amount exceeds the balance"
                 puts "Balance: #{@balance}"
                 return 0
