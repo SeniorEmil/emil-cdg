@@ -3,7 +3,7 @@ require 'socket'
 require 'rack'
 require 'rack/utils'
 
-server = TCPServer.new 3000
+server = TCPServer.new 1080
 puts('Server started!')
 
 while (connection = server.accept)
