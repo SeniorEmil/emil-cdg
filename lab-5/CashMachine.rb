@@ -7,8 +7,8 @@ class CashMachine
     #кладёт депозит на баланс
     def deposit(sum)
         if sum <= 0
-            puts "Error: enter the correct value."
-            puts "Balance: #{@balance}"
+            "Error: enter the correct value."
+            "Balance: #{@balance}"
         end
         @balance += sum
         "New balance: #{@balance}"
@@ -17,12 +17,12 @@ class CashMachine
     #вывод средств
     def withdraw(sum)
             if (sum <= 0) 
-                puts "Error: enter the correct value."
-                puts "Balance: #{@balance}"
+                "Error: enter the correct value."
+                "Balance: #{@balance}"
                 return 0
-            elsif (sum >= @balance)
-                puts "Error: the entered amount exceeds the balance"
-                puts "Balance: #{@balance}"
+            elsif (sum > @balance)
+                "Error: the entered amount exceeds the balance"
+                "Balance: #{@balance}"
                 return 0
             end
             @balance -= sum

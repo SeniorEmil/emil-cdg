@@ -1,5 +1,5 @@
 class CashMachine
-
+    
     def initialize()
         File.exist?("balance.txt") ? @balance = File.read("balance.txt").split("\n")[0].to_f : @balance = 100.0
     end
@@ -26,7 +26,7 @@ class CashMachine
                 puts "Error: введите корректное значение."
                 puts "Ваш баланс: #{@balance}"
                 return 0
-            elsif (withdraw >= @balance)
+            elsif (withdraw > @balance)
                 puts "Error: введённая сумма превышает баланс"
                 puts "Ваш баланс: #{@balance}"
                 return 0
