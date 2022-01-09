@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'lab_reports#index'
+
+  resources :lab_reports
+
+  get '/LabReports/:id/mark', to: 'lab_reports#mark', as: 'mark_lab_report'
+
+  post '/LabReports/:id/mark', to: 'lab_reports#grade'
 end
