@@ -1,5 +1,4 @@
 class LabReportsController < ApplicationController
-    # before_action :find_lab, only: %i[show update destroy edit mark grade]
 
     def index
       @lab_reports = LabReport.all
@@ -20,7 +19,7 @@ class LabReportsController < ApplicationController
         redirect_to root_url
         flash[:success] = "Lab report was added"
       else
-        render :new
+        redirect_to root_path
         flash[:DANGER] = "Some error occured"
       end
     end
@@ -62,13 +61,4 @@ class LabReportsController < ApplicationController
       flash[:success] = "Lab was deleted successfully"
     end
 
-    # private
-    #
-    # def find_lab
-    #   @lab_report = LabReport.find params[:id]
-    # end
-    #
-    # def lab_params
-    #   params.require(:lab_report).permit(:title, :description)
-    # end
 end
