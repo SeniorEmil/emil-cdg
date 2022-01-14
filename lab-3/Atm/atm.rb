@@ -27,7 +27,7 @@ def withdraw
             puts $ERROR = "Error: введите корректное значение."
             puts "Ваш баланс: #{$balance}"
             return 0
-        elsif (withdraw >= $balance)
+        elsif (withdraw > $balance)
             puts $ERROR = "Error: введённая сумма превышает баланс"
             puts "Ваш баланс: #{$balance}"
             return 0
