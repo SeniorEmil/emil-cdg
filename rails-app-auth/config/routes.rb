@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :auth_users
   root 'lab_reports#index'
 
   resources :lab_reports
