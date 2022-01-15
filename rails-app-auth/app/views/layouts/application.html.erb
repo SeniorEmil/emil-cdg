@@ -18,6 +18,9 @@
 
   <body>
     <div class="container">
+      <% if auth_user_signed_in? %>
+        Email: <%= current_auth_user.email %>
+      <% end %>
       <%= yield %>
     </div>
   </body>
