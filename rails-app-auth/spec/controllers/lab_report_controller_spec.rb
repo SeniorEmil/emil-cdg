@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe LabReportsController, type: :controller do
-  let(:user) { create :user }
-  let(:params) { { user_id: user } }
+  let(:auth_user) { create :auth_user }
+  let(:params) { { auth_user_id: auth_user } }
 
   describe '#index' do
     subject { get :index, params: params }
 
-    let!(:lab_report) { create :lab_report, user: user }
+    let!(:lab_report) { create :lab_report, auth_user: auth_user }
 
     it 'assigns @LabReports' do
       subject
@@ -29,8 +29,8 @@ RSpec.describe LabReportsController, type: :controller do
   end
 
   describe '#edit' do
-    let!(:lab_report) { create :lab_report, user: user }
-    let(:params) { { id: lab_report, user_id: user } }
+    let!(:lab_report) { create :lab_report, auth_user: auth_user }
+    let(:params) { { id: lab_report, auth_user_id: auth_user } }
 
     subject { process :edit, method: :get, params: params }
 
@@ -43,8 +43,8 @@ RSpec.describe LabReportsController, type: :controller do
   end
 
   describe '#update' do
-    let!(:lab_report) { create :lab_report, user: user }
-    let(:params) { { id: lab_report, user_id: user, lab_report: { title: 'Some title' } } }
+    let!(:lab_report) { create :lab_report, auth_user: auth_user }
+    let(:params) { { id: lab_report, auth_user_id: auth_user, lab_report: { title: 'Some title' } } }
 
     subject { process :update, method: :put, params: params }
 
@@ -53,7 +53,7 @@ RSpec.describe LabReportsController, type: :controller do
     end
 
     context 'with bad params' do
-      let(:params) { { id: lab_report, user_id: user, lab_report: { title: '' } } }
+      let(:params) { { id: lab_report, auth_user_id: auth_user, lab_report: { title: '' } } }
 
       it 'does not update lab_report' do
         expect { subject }.not_to change { lab_report.reload.title }
@@ -62,11 +62,11 @@ RSpec.describe LabReportsController, type: :controller do
   end
 
   describe '#show' do
-    let(:params) { { user_id: user.id, id: lab_report } }
+    let(:params) { { auth_user_id: auth_user.id, id: lab_report } }
 
     subject { get :show, params: params }
 
-    let!(:lab_report) { create :lab_report, user: user }
+    let!(:lab_report) { create :lab_report, auth_user: auth_user }
 
     it 'assigns @lab_report' do
       subject
@@ -77,8 +77,8 @@ RSpec.describe LabReportsController, type: :controller do
   end
 
   describe '#destroy' do
-    let!(:lab_report) { create :lab_report, user: user }
-    let(:params) { { id: lab_report, user_id: user } }
+    let!(:lab_report) { create :lab_report, auth_user: auth_user }
+    let(:params) { { id: lab_report, auth_user_id: auth_user } }
 
     subject { process :destroy, method: :delete, params: params }
 
@@ -88,8 +88,8 @@ RSpec.describe LabReportsController, type: :controller do
   end
 
   describe '#mark' do
-    let!(:lab_report) { create :lab_report, user: user }
-    let(:params) { { id: lab_report, user_id: user } }
+    let!(:lab_report) { create :lab_report, auth_user: auth_user }
+    let(:params) { { id: lab_report, auth_user_id: auth_user } }
 
     subject { process :mark, method: :get, params: params }
 
