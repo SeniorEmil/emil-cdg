@@ -1,6 +1,6 @@
 require "test_helper"
 
-class LabTest < ActiveSupport::TestCase
+class LabReportTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
