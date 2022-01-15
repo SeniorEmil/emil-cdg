@@ -5,10 +5,7 @@ class CashMachine
     end
     
     #кладёт депозит на баланс
-    def deposit
-        puts "Введите сумму депозита."
-        print "Сумма должна быть больше нуля: "
-        deposit = gets.to_f
+    def deposit(deposit)
         if deposit <= 0
             puts "Error: введите корректное значение."
             puts "Ваш баланс: #{@balance}"
@@ -18,10 +15,8 @@ class CashMachine
     end
 
     #вывод средств
-    def withdraw
-            puts "Введите сумму вывода."
-            print "Сумма должна быть больше нуля: "
-            withdraw = gets.to_f
+    def withdraw(withdraw)
+
             if (withdraw <= 0) 
                 puts "Error: введите корректное значение."
                 puts "Ваш баланс: #{@balance}"
@@ -43,7 +38,7 @@ class CashMachine
         File.write("balance.txt", @balance)
     end
     
-    def init
+    def self.init
         init = CashMachine.new()
         loop do
             puts "="*20
@@ -57,9 +52,13 @@ class CashMachine
             puts "="*20
             case input
             when "D"
-                init.deposit
+                puts "Введите сумму депозита."
+                print "Сумма должна быть больше нуля: "
+                init.deposit(gets.to_f)
             when "W"
-                init.withdraw
+                puts "Введите сумму вывода."
+                print "Сумма должна быть больше нуля: "
+                init.withdraw(gets.to_f)
             when "B"
                 init.balance
             when "Q"
@@ -72,5 +71,5 @@ class CashMachine
     end
 end
 
-# atm = CashMachine.new()
-# atm.init
+#  atm = CashMachine.new()
+#  atm.init
