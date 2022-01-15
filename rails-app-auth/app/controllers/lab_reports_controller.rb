@@ -1,5 +1,7 @@
 class LabReportsController < ApplicationController
 
+    before_action :authenticate_auth_user!
+
     def index
       @lab_reports = LabReport.all
     end
@@ -13,9 +15,10 @@ class LabReportsController < ApplicationController
     end
 
     def create
-      lab=LabReport.new(params.require(:lab_report).permit(:title,:description))
-      lab.user_id=1
-      if lab.save
+      lab_report=LabReport.new(params.require(:lab_report).permit(:title,:description))
+      lab_report.auth_user_id = current_auth_user.id
+
+      if lab_report.save
         redirect_to root_url
         flash[:success] = "Lab report was added"
       else
