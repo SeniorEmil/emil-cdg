@@ -1,0 +1,34 @@
+<h1>Лабораторные отчёты</h1><br>
+
+
+<%= link_to 'Загрузить лабороторный отчёт', new_lab_report_path, class: 'btn btn-outline-primary' %>
+<br><br>
+
+<% flash.each do |type, msg| %>
+  <div class="alert alert-<%= type %>">
+    <%= msg %>
+  </div>
+<% end %>
+
+<div class="row">
+  <% @lab_reports.each do |lab_report| %>
+<!--      <td><%#= lab_report.user_id %></td>-->
+    <div class="col">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-dark">
+          <%= lab_report.title %>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">Содержимое:</h5>
+          <p class="card-text"><%= lab_report.description %></p>
+        </div>
+        <div class="card-footer bg-transparent border-success">Оценка: <%= lab_report.grade %></div>
+        <%= link_to 'Редактировать', edit_lab_report_path(lab_report), class: 'btn btn-outline-primary' %>
+        <%= link_to 'Просмотр', lab_report_path(lab_report), class: 'btn btn-outline-info' %>
+        <%= link_to 'Поставить оценку', mark_lab_report_path(lab_report), class: 'btn btn-outline-warning' %>
+        <%= link_to 'Удалить', lab_report_path(lab_report), method: :delete, data: {confirm: "Вы уверены?"}, class: 'btn btn-outline-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

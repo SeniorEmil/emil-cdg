@@ -1,0 +1,6 @@
+<h1>Title: <%= @lab_report.title %></h1><br>
+<h2>Description: <%= @lab_report.description %></h2><br>
+<h2>Grade: <%= @lab_report.grade %></h2><br>
+<%= link_to 'Редактировать', edit_lab_report_path(@lab_report), class: 'btn btn-outline-primary' %>
+<%= link_to 'Назад', root_path, class: 'btn btn-secondary' %>
+<%= link_to 'Поставить оценку', mark_lab_report_path, class: 'btn btn-warning' %>

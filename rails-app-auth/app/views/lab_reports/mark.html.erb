@@ -1,0 +1,14 @@
+<h2>Поставить оценку</h2><br>
+
+<%= form_with url: mark_lab_report_path(@lab_report) do |f| %>
+  <% if @lab_report.errors.any?%>
+    <% @lab_report.errors.full_messages.each do |msg| %>
+    <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+
+  <h4>Grade</h4>
+    <%= f.select :grade, [["A", "A"], ["B", "B"], ["C", "C"], ["D", "D"], ["E", "E"], ["FX", "FX"], ["F", "F"]] %>
+    <%= f.submit({:class => 'btn btn-success'}) %>
+    <%= link_to 'Назад', root_path, class: 'btn btn-secondary' %>
+<% end %>
